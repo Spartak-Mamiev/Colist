@@ -1,7 +1,12 @@
+import LoginPage from './components/login/LoginPage';
 import './App.css';
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <LoginPage />
+    </>
+  );
 }
 
 export default App;
