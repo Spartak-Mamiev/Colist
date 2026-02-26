@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/login/LoginPage';
 import MainPage from './components/mainPage/MainPage';
 import './App.css';
-import ListPage from './components/listPage/ListPage';
+import Members from './components/members/Members';
+import Settings from './components/settings/Settings';
 
 function App() {
   return (
@@ -17,8 +18,12 @@ function App() {
           element={<LoginPage />}
         />
         <Route
-          path="/list"
-          element={<ListPage />}
+          path="/members"
+          element={<Members />}
+        />
+        <Route
+          path="/settings"
+          element={<Settings />}
         />
       </Routes>
     </BrowserRouter>
