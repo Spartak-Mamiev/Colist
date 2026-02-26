@@ -3,9 +3,9 @@ import styles from './MainPage.module.css';
 
 export default function MainPage() {
   return (
-    <main>
-      <header>
-        <h1>Your Lists</h1>
+    <main className={styles.mainPage}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Your Lists</h1>
         <Link
           to="/settings"
           className={styles.settingsBtn}
@@ -17,12 +17,22 @@ export default function MainPage() {
         className={styles.listsSection}
         aria-label="Your lists"
       >
-        <ul>
-          <li>
-            <button type="button">Dinner</button>
+        <ul className={styles.listGrid}>
+          <li className={styles.listItem}>
+            <button
+              className={styles.listBtn}
+              type="button"
+            >
+              Dinner
+            </button>
           </li>
-          <li>
-            <button type="button">Home</button>
+          <li className={styles.listItem}>
+            <button
+              className={styles.listBtn}
+              type="button"
+            >
+              Home
+            </button>
           </li>
         </ul>
       </section>

@@ -5,30 +5,54 @@ export default function LoginPage() {
   return (
     <main className={styles.loginPageContainer}>
       <header className={styles.ctaContainer}>
-        <h1>Welcome Back</h1>
-        <p>Sign in to continue sharing lists</p>
+        <h1 className={styles.title}>Welcome Back</h1>
+        <p className={styles.subtitle}>Sign in to continue sharing lists</p>
       </header>
-      <form>
+      <form className={styles.loginForm}>
         <div className={styles.loginInputContainer}>
-          <label htmlFor="name">Name</label>
+          <label
+            className={styles.inputLabel}
+            htmlFor="name"
+          >
+            Name
+          </label>
           <input
+            className={styles.inputField}
             type="text"
             name="name"
             id="name"
             placeholder="Your name"
           />
-          <label htmlFor="email">Email</label>
+          <label
+            className={styles.inputLabel}
+            htmlFor="email"
+          >
+            Email
+          </label>
           <input
+            className={styles.inputField}
             type="email"
             name="email"
             id="email"
             placeholder="your@email.com"
           />
         </div>
-        <button type="submit">Sign in</button>
+        <button
+          className={styles.submitBtn}
+          type="submit"
+        >
+          Sign in
+        </button>
       </form>
-      <p>
-        Not registered? <Link to="/signup">Sign up</Link>.
+      <p className={styles.signupPrompt}>
+        Not registered?{' '}
+        <Link
+          className={styles.signupLink}
+          to="/signup"
+        >
+          Sign up
+        </Link>
+        .
       </p>
     </main>
   );
