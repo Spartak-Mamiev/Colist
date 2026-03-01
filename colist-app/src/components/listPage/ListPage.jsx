@@ -3,11 +3,13 @@ import styles from './ListPage.module.css';
 import Button from '../ui/button/Button';
 import Header from '../ui/header/Header';
 
+import { HiOutlineUserAdd } from 'react-icons/hi';
+
 export default function ListPage() {
   return (
     <>
       <header className={styles.header}>
-        <Header />
+        <Header children="Grocery List" />
 
         <div className={styles.collaboratorsBar}>
           <ul
@@ -17,13 +19,10 @@ export default function ListPage() {
             <li className={styles.collaborator}>John</li>
             <li className={styles.collaborator}>Jane</li>
           </ul>
-          <Button>+ Invite</Button>
-          {/*           <Button
-            className={styles.inviteBtn}
-            aria-label="Invite collaborator"
-          >
-            +
-          </Button> */}
+          <Button variant="transparent">
+            <HiOutlineUserAdd />
+            Invite
+          </Button>
         </div>
       </header>
       <main className={styles.groceryList}>

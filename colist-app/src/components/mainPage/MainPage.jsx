@@ -7,7 +7,7 @@ import Header from '../ui/header/Header';
 export default function MainPage() {
   return (
     <main className={styles.mainPage}>
-      <Header />
+      <Header>Your Lists</Header>
       <section
         className={styles.listsSection}
         aria-label="Your lists"
