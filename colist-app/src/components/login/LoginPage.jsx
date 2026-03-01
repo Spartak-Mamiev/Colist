@@ -19,17 +19,14 @@ export default function LoginPage() {
           >
             Name
           </label>
+
           <Input
-            type="text"
-            placeholder="Your Name"
-          />
-          {/* <input
             className={styles.inputField}
             type="text"
             name="name"
             id="name"
             placeholder="Your name"
-          /> */}
+          />
           <label
             className={styles.inputLabel}
             htmlFor="email"

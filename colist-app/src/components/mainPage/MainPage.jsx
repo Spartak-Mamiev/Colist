@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './MainPage.module.css';
+import Button from '../ui/Button';
+import Input from '../ui/input/Input';
 
 export default function MainPage() {
   return (
@@ -19,29 +21,20 @@ export default function MainPage() {
       >
         <ul className={styles.listGrid}>
           <li className={styles.listItem}>
-            <button
-              className={styles.listBtn}
-              type="button"
-            >
-              Dinner
-            </button>
+            <Button>Dinner</Button>
           </li>
           <li className={styles.listItem}>
-            <button
-              className={styles.listBtn}
-              type="button"
-            >
-              Home
-            </button>
+            <Button>Home</Button>
           </li>
         </ul>
       </section>
-      <button
-        className={styles.addListBtn}
-        aria-label="Add new list"
-      >
-        +
-      </button>
+      <footer>
+        <Input
+          type="search"
+          placeholder="Add an item..."
+        ></Input>
+        <Button>+</Button>
+      </footer>
     </main>
   );
 }

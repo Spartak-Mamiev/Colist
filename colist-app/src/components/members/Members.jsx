@@ -1,29 +1,41 @@
-import styles from "./Members.module.css";
+import styles from './Members.module.css';
+import Button from '../ui/Button';
 
 export default function Members() {
   return (
     <div className={styles.membersPage}>
       <header className={styles.pageHeader}>
         <div className={styles.headerTopRow}>
-          <button className={styles.backBtn}>Back</button>
+          <Button>Back</Button>
           <h1>Members</h1>
         </div>
-        <button type="button" className={styles.inviteBtn}>
-          <img src="" alt="" aria-hidden="true" />
+        <Button>
+          <img
+            src=""
+            alt=""
+            aria-hidden="true"
+          />
           <span>Invite Member</span>
-        </button>
+        </Button>
       </header>
       <main className={styles.mainContent}>
         <ul className={styles.listOfMembers}>
           <li className={styles.memberContainer}>
-            <img src="" alt="John avatar" className={styles.memberAvatar} />
+            <img
+              src=""
+              alt="John avatar"
+              className={styles.memberAvatar}
+            />
             <div className={styles.memberInfoContainer}>
               <h2>John</h2>
               <p>john@email.com</p>
             </div>
-            <button type="button" className={styles.deleteBtn}>
+            <Button
+              type="Button"
+              className={styles.deleteBtn}
+            >
               Delete
-            </button>
+            </Button>
           </li>
         </ul>
       </main>

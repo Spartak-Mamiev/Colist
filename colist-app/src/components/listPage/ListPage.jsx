@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './ListPage.module.css';
+import Button from '../ui/Button';
 
 export default function ListPage() {
   return (
@@ -28,12 +29,13 @@ export default function ListPage() {
             <li className={styles.collaborator}>John</li>
             <li className={styles.collaborator}>Jane</li>
           </ul>
-          <button
+          <Button>+ Invite</Button>
+          {/*           <Button
             className={styles.inviteBtn}
             aria-label="Invite collaborator"
           >
             +
-          </button>
+          </Button> */}
         </div>
       </header>
       <main className={styles.groceryList}>
