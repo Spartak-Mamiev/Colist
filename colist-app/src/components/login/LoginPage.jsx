@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 
 import Button from '../ui/Button';
+import Input from '../ui/input/Input';
 
 export default function LoginPage() {
   return (
@@ -18,26 +19,34 @@ export default function LoginPage() {
           >
             Name
           </label>
-          <input
+          <Input
+            type="text"
+            placeholder="Your Name"
+          />
+          {/* <input
             className={styles.inputField}
             type="text"
             name="name"
             id="name"
             placeholder="Your name"
-          />
+          /> */}
           <label
             className={styles.inputLabel}
             htmlFor="email"
           >
             Email
           </label>
-          <input
+          <Input
+            type="email"
+            placeholder="your@email.com"
+          />
+          {/* <input
             className={styles.inputField}
             type="email"
             name="email"
             id="email"
             placeholder="your@email.com"
-          />
+          /> */}
         </div>
         <Button
           type="submit"
