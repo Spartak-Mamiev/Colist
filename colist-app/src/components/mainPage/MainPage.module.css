@@ -1,0 +1,14 @@
+.listsSection{
+  margin-top: 40px;
+}
+
+footer{
+  width: 100%;
+  display: flex;
+  position: fixed;
+  gap: 10px;
+  bottom: 0;
+  justify-self: center;
+  padding: 20px;
+  border-top: 1px solid var(--color-border);
+}

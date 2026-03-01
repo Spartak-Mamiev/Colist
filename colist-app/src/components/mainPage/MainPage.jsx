@@ -3,6 +3,7 @@ import styles from './MainPage.module.css';
 import Button from '../ui/button/Button';
 import Input from '../ui/input/Input';
 import Header from '../ui/header/Header';
+import List from '../ui/list/List';
 
 export default function MainPage() {
   return (
@@ -12,14 +13,16 @@ export default function MainPage() {
         className={styles.listsSection}
         aria-label="Your lists"
       >
-        <ul className={styles.listGrid}>
-          <li className={styles.listItem}>
-            <Button>Dinner</Button>
-          </li>
-          <li className={styles.listItem}>
-            <Button>Home</Button>
-          </li>
-        </ul>
+        <div className={styles.listGrid}>
+          <List
+            name="Dinner"
+            creator="You"
+          ></List>
+          <List
+            name="Weekend"
+            creator="You"
+          ></List>
+        </div>
       </section>
       <footer>
         <Input
