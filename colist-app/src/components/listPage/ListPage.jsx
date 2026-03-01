@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './ListPage.module.css';
 import Button from '../ui/button/Button';
 import Header from '../ui/header/Header';
+import Avatar from '../ui/avatar/Avatar';
 
 import { HiOutlineUserAdd } from 'react-icons/hi';
 
@@ -12,13 +13,13 @@ export default function ListPage() {
         <Header children="Grocery List" />
 
         <div className={styles.collaboratorsBar}>
-          <ul
+          <div
             aria-label="Collaborators"
             className={styles.collaboratorsList}
           >
-            <li className={styles.collaborator}>John</li>
-            <li className={styles.collaborator}>Jane</li>
-          </ul>
+            <Avatar children="M" />
+            <Avatar children="S" />
+          </div>
           <Button variant="transparent">
             <HiOutlineUserAdd />
             Invite

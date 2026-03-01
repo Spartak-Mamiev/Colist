@@ -53,10 +53,7 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.transparent{
-  background: none;
 
-}
 
 /* Sizes */
 .small {
@@ -80,4 +77,10 @@
 /* Full width */
 .fullWidth {
   width: 100%;
+}
+
+.transparent{
+  background: none;
+  padding: 0;
+  margin: 0;
 }
