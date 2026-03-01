@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './ListPage.module.css';
-import Button from '../ui/Button';
+import Button from '../ui/button/Button';
 
 export default function ListPage() {
   return (

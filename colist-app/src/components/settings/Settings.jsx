@@ -1,5 +1,5 @@
 import styles from './Settings.module.css';
-import Button from '../ui/Button';
+import Button from '../ui/button/Button';
 import Input from '../ui/input/Input';
 
 export default function Settings() {

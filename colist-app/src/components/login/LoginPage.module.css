@@ -1,0 +1,17 @@
+.ctaContainer,
+.loginPageContainer,
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginInputContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signupPrompt{
+  align-self: center;
+}

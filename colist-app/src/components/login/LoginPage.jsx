@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 
-import Button from '../ui/Button';
+import Button from '../ui/button/Button';
 import Input from '../ui/input/Input';
 
 export default function LoginPage() {
@@ -34,6 +34,8 @@ export default function LoginPage() {
           </label>
           <Input
             type="email"
+            name="email"
+            id="email"
             placeholder="your@email.com"
           />
         </div>

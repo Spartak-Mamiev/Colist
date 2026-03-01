@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './MainPage.module.css';
-import Button from '../ui/Button';
+import Button from '../ui/button/Button';
 import Input from '../ui/input/Input';
 
 export default function MainPage() {

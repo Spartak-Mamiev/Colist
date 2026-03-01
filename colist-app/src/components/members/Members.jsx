@@ -1,5 +1,5 @@
 import styles from './Members.module.css';
-import Button from '../ui/Button';
+import Button from '../ui/button/Button';
 
 export default function Members() {
   return (
