@@ -21,7 +21,6 @@ export default function LoginPage() {
           </label>
 
           <Input
-            className={styles.inputField}
             type="text"
             name="name"
             id="name"
@@ -37,13 +36,6 @@ export default function LoginPage() {
             type="email"
             placeholder="your@email.com"
           />
-          {/* <input
-            className={styles.inputField}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="your@email.com"
-          /> */}
         </div>
         <Button
           type="submit"
