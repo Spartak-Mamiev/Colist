@@ -2,28 +2,116 @@
 }
 
 .pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding: 20px;
+  background-color: var(--color-surface);
 }
 
 .mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px 30px 20px 30px;
 }
 
 .section {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-small);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .profileSummary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .profileText {
 }
 
 .profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.select {
+  padding: 10px;
+  border-radius: var(--radius-small);
+  border-color: var(--color-border);
+  outline: none;
+}
+
+.select:focus {
+  border-style: inset;
+  border: 3px solid var(--color-primary);
+  outline: none;
+}
+
+.select option {
 }
 
 .notificationRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
 }
 
 .notificationText {
 }
 
+.toggleInput {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.toggle {
+  width: 58px;
+  height: 28px;
+  border-radius: 9999px;
+  background-color: var(--color-border);
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toggleThumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  transition: transform 0.2s;
+}
+
+.toggleInput:checked + .toggle {
+  background-color: var(--color-primary);
+}
+
+.toggleInput:checked + .toggle .toggleThumb {
+  transform: translateX(20px);
+}
+
+.toggleInput:focus-visible + .toggle {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .pageFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  position: relative;
+  border: none;
 }

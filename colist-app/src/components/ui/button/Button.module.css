@@ -6,7 +6,9 @@
   border: none;
   cursor: pointer;
   font-family: inherit;
-  transition: background-color 0.2s, opacity 0.2s;
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
 }
 
 .button:disabled {
@@ -53,8 +55,6 @@
   font-weight: var(--font-weight-semibold);
 }
 
-
-
 /* Sizes */
 .small {
   font-size: var(--font-size-caption);
@@ -79,7 +79,7 @@
   width: 100%;
 }
 
-.transparent{
+.transparent {
   background: none;
   padding: 0;
   margin: 0;

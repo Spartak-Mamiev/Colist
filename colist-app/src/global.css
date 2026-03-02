@@ -18,31 +18,28 @@
   --radius-modal: 24px;
 }
 
-
 @media (prefers-color-scheme: light) {
   :root {
-  /* Colors */
-  --color-primary: rgb(76, 175, 80);
-  --color-background: rgb(247, 248, 247);
-  --color-surface: rgb(255, 255, 255);
-  --color-border: rgb(230, 232, 230);
-  --color-text-primary: rgb(29, 29, 31);
-  --color-text-secondary: rgb(110, 110, 115);
-  --color-error: rgb(229, 72, 77);
-}
-
+    /* Colors */
+    --color-primary: rgb(76, 175, 80);
+    --color-background: rgb(247, 248, 247);
+    --color-surface: rgb(255, 255, 255);
+    --color-border: rgb(230, 232, 230);
+    --color-text-primary: rgb(29, 29, 31);
+    --color-text-secondary: rgb(110, 110, 115);
+    --color-error: rgb(229, 72, 77);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-  /* Colors */
-  --color-primary: rgb(76, 175, 80);
-  --color-background: #121212;
-  --color-surface:rgb(30, 30, 30);
-  --color-border: rgb(230, 232, 230);
-  --color-text-primary: rgb(255, 255, 255);
-  --color-text-secondary: rgb(179, 179, 179);
-  --color-error: rgb(229, 72, 77);
-}
-
+    /* Colors */
+    --color-primary: rgb(76, 175, 80);
+    --color-background: #121212;
+    --color-surface: rgb(30, 30, 30);
+    --color-border: rgb(230, 232, 230);
+    --color-text-primary: rgb(255, 255, 255);
+    --color-text-secondary: rgb(179, 179, 179);
+    --color-error: rgb(229, 72, 77);
+  }
 }

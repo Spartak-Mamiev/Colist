@@ -11,7 +11,7 @@ export default function Item({ name, addedBy }) {
           className={styles.itemCheckbox}
         />
         <div className={styles.itemText}>
-          <span className={styles.itemName}>{name}</span>
+          <h3 className={styles.itemName}>{name}</h3>
           <small className={styles.itemMeta}>{addedBy}</small>
         </div>
       </label>

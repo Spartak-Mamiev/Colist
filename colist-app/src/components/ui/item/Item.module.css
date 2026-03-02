@@ -1,4 +1,4 @@
-.groceryItem{
+.groceryItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,14 +6,19 @@
   border-radius: var(--radius-small);
   padding: 20px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
-.itemLabel{
+.groceryItem:hover {
+  background-color: var(--color-surface);
+}
+
+.itemLabel {
   display: flex;
   gap: 10px;
 }
 
-.itemText{
+.itemText {
   display: flex;
   flex-direction: column;
 }

@@ -1,25 +1,27 @@
-import styles from './Settings.module.css';
-import Button from '../ui/button/Button';
-import Input from '../ui/input/Input';
+import styles from "./Settings.module.css";
+import Button from "../ui/button/Button";
+import Input from "../ui/input/Input";
+import Avatar from "../ui/avatar/Avatar";
+
+import { FaArrowLeft } from "react-icons/fa";
+import { RxExit } from "react-icons/rx";
+import { CiDark } from "react-icons/ci";
+import { CiLight } from "react-icons/ci";
 
 export default function Settings() {
   return (
     <div className={styles.settingsPage}>
       <header className={styles.pageHeader}>
-        <Button type="Button">Back</Button>
+        <Button type="Button" variant="transparent">
+          <FaArrowLeft />
+        </Button>
         <h1>Settings</h1>
       </header>
       <main className={styles.mainContent}>
-        <section
-          className={styles.section}
-          aria-labelledby="profile-heading"
-        >
+        <section className={styles.section} aria-labelledby="profile-heading">
           <h2 id="profile-heading">Profile</h2>
           <div className={styles.profileSummary}>
-            <img
-              src=""
-              alt="avatar"
-            />
+            <Avatar variant="large">Y</Avatar>
             <div className={styles.profileText}>
               <h3>You</h3>
               <p>you@mail.com</p>
@@ -27,12 +29,7 @@ export default function Settings() {
           </div>
           <form className={styles.profileForm}>
             <label htmlFor="name">Name</label>
-            <Input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your name"
-            />
+            <Input type="text" id="name" name="name" placeholder="Your name" />
             <label htmlFor="email">Email</label>
             <Input
               type="email"
@@ -50,12 +47,15 @@ export default function Settings() {
         >
           <h2 id="appearance-heading">Appearance</h2>
           <label htmlFor="theme">Theme</label>
-          <select
-            name="theme"
-            id="theme"
-          >
-            <option value="Light">Light</option>
-            <option value="Dark">Dark</option>
+          <select name="theme" id="theme" className={styles.select}>
+            <option value="Light">
+              <CiLight />
+              Light
+            </option>
+            <option value="Dark">
+              <CiDark />
+              Dark
+            </option>
           </select>
         </section>
 
@@ -63,32 +63,32 @@ export default function Settings() {
           className={styles.section}
           aria-labelledby="notifications-heading"
         >
-          <h2 id="notifications-heading">Notifications</h2>
+          <h3 id="notifications-heading">Notifications</h3>
           <div className={styles.notificationRow}>
             <div className={styles.notificationText}>
-              <h3>Push Notifications</h3>
+              <h4>Push Notifications</h4>
               <p>Get notifies when items are added or checked off</p>
             </div>
             <input
               type="checkbox"
               id="push-notifications"
               name="pushNotifications"
+              className={styles.toggleInput}
             />
-            <label htmlFor="push-notifications">
-              Enable push notifications
+            <label
+              htmlFor="push-notifications"
+              className={styles.toggle}
+              aria-label="Enable push notifications"
+            >
+              <span className={styles.toggleThumb}></span>
             </label>
           </div>
         </section>
 
-        <section
-          className={styles.section}
-          aria-labelledby="account-heading"
-        >
-          <h2 id="account-heading">Account</h2>
-          <Button
-            type="Button"
-            variant="logout"
-          >
+        <section className={styles.section} aria-labelledby="account-heading">
+          <h3 id="account-heading">Account</h3>
+          <Button type="Button" variant="logout">
+            <RxExit />
             Log Out
           </Button>
         </section>
