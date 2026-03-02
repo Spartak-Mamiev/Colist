@@ -4,6 +4,7 @@ import Button from '../ui/button/Button';
 import Header from '../ui/header/Header';
 import Avatar from '../ui/avatar/Avatar';
 import Item from '../ui/item/Item';
+import Modal from '../ui/modal/Modal';
 
 import { HiOutlineUserAdd } from 'react-icons/hi';
 import { FaRegTrashAlt } from 'react-icons/fa';
@@ -29,6 +30,7 @@ export default function ListPage() {
         </div>
       </header>
       <main className={styles.groceryList}>
+        <Modal></Modal>
         <section
           aria-label="Active items"
           className={styles.activeSection}

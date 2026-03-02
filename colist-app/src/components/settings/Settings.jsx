@@ -1,24 +1,28 @@
-import styles from "./Settings.module.css";
-import Button from "../ui/button/Button";
-import Input from "../ui/input/Input";
-import Avatar from "../ui/avatar/Avatar";
+import styles from './Settings.module.css';
+import Button from '../ui/button/Button';
+import Input from '../ui/input/Input';
+import Avatar from '../ui/avatar/Avatar';
 
-import { FaArrowLeft } from "react-icons/fa";
-import { RxExit } from "react-icons/rx";
-import { CiDark } from "react-icons/ci";
-import { CiLight } from "react-icons/ci";
+import { FaArrowLeft } from 'react-icons/fa';
+import { RxExit } from 'react-icons/rx';
+import { CiDark } from 'react-icons/ci';
+import { CiLight } from 'react-icons/ci';
+import { Link } from 'react-router-dom';
 
 export default function Settings() {
   return (
     <div className={styles.settingsPage}>
       <header className={styles.pageHeader}>
-        <Button type="Button" variant="transparent">
+        <Link to="/">
           <FaArrowLeft />
-        </Button>
+        </Link>
         <h1>Settings</h1>
       </header>
       <main className={styles.mainContent}>
-        <section className={styles.section} aria-labelledby="profile-heading">
+        <section
+          className={styles.section}
+          aria-labelledby="profile-heading"
+        >
           <h2 id="profile-heading">Profile</h2>
           <div className={styles.profileSummary}>
             <Avatar variant="large">Y</Avatar>
@@ -29,7 +33,12 @@ export default function Settings() {
           </div>
           <form className={styles.profileForm}>
             <label htmlFor="name">Name</label>
-            <Input type="text" id="name" name="name" placeholder="Your name" />
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your name"
+            />
             <label htmlFor="email">Email</label>
             <Input
               type="email"
@@ -47,7 +56,11 @@ export default function Settings() {
         >
           <h2 id="appearance-heading">Appearance</h2>
           <label htmlFor="theme">Theme</label>
-          <select name="theme" id="theme" className={styles.select}>
+          <select
+            name="theme"
+            id="theme"
+            className={styles.select}
+          >
             <option value="Light">
               <CiLight />
               Light
@@ -85,9 +98,15 @@ export default function Settings() {
           </div>
         </section>
 
-        <section className={styles.section} aria-labelledby="account-heading">
+        <section
+          className={styles.section}
+          aria-labelledby="account-heading"
+        >
           <h3 id="account-heading">Account</h3>
-          <Button type="Button" variant="logout">
+          <Button
+            type="Button"
+            variant="logout"
+          >
             <RxExit />
             Log Out
           </Button>

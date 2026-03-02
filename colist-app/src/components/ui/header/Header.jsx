@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 export default function Header({ children }) {
   return (
     <header className={styles.header}>
-      <Button variant="transparent">
+      <Link to="/">
         <GiHamburgerMenu />
-      </Button>
+      </Link>
       <h1 className={styles.title}>{children}</h1>
       <Link
         to="/settings"
