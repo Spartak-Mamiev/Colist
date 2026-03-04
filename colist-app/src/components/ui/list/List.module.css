@@ -1,4 +1,4 @@
-.listContainer{
+.listContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,9 +7,24 @@
   padding: 20px;
   margin-top: 10px;
   background: var(--color-background);
+  cursor: pointer;
 }
 
-.listNameContainer{
+.listContainer:hover {
+  border: 2px solid var(--color-primary);
+}
+
+.listNameContainer {
   display: flex;
   flex-direction: column;
 }
+
+.deleteBtn {
+  transition: all 0.1s ease;
+}
+
+.deleteBtn:hover {
+  scale: 1.2;
+}
+
+

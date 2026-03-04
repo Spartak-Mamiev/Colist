@@ -16,7 +16,7 @@ export default function Item({ name, addedBy }) {
         </div>
       </label>
       <Button variant='transparent'>
-        <FaRegTrashAlt fill='red'/>
+        <FaRegTrashAlt fill='red'  className={styles.deleteBtn}/>
       </Button>
     </div>
   );

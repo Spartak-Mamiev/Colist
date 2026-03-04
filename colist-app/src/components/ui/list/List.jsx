@@ -1,6 +1,6 @@
-import style from './List.module.css';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import Button from '../button/Button';
+import style from "./List.module.css";
+import { FaRegTrashAlt } from "react-icons/fa";
+import Button from "../button/Button";
 
 export default function List({ name, creator }) {
   return (
@@ -10,7 +10,7 @@ export default function List({ name, creator }) {
         <p>Created by {creator}</p>
       </div>
       <Button variant="transparent">
-        <FaRegTrashAlt fill="red" />
+        <FaRegTrashAlt fill="red"  />
       </Button>
     </div>
   );
