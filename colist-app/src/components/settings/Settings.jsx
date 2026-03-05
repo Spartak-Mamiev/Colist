@@ -4,9 +4,12 @@ import Input from '../ui/input/Input';
 import Avatar from '../ui/avatar/Avatar';
 import Header from '../ui/header/Header';
 
+import { useNavigate } from 'react-router-dom';
+
 import { RxExit } from 'react-icons/rx';
 
 export default function Settings() {
+  const navigate = useNavigate();
   return (
     <div className={styles.settingsPage}>
       <Header
@@ -102,6 +105,7 @@ export default function Settings() {
           <Button
             type="button"
             variant="logout"
+            onClick={() => navigate('/login')}
           >
             <RxExit />
             Log Out
