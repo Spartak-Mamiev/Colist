@@ -32,19 +32,21 @@ export default function Settings() {
             </div>
           </div>
           <form className={styles.profileForm}>
-            <label htmlFor="name">Name</label>
             <Input
               type="text"
               id="name"
               name="name"
               placeholder="Your name"
+              label="Name"
+              labelFor="name"
             />
-            <label htmlFor="email">Email</label>
             <Input
               type="email"
               id="email"
               name="email"
               placeholder="you@email.com"
+              label="Email"
+              labelFor="email"
             />
             <Button type="submit">Save Changes</Button>
           </form>

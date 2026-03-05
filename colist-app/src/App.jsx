@@ -5,6 +5,7 @@ import './App.css';
 import Members from './components/members/Members';
 import Settings from './components/settings/Settings';
 import ListPage from './components/listPage/ListPage';
+import SignUpPage from './components/signUpPage/SignUpPage';
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
         <Route
           path="/list"
           element={<ListPage />}
+        />
+        <Route
+          path="/signup"
+          element={<SignUpPage />}
         />
       </Routes>
     </BrowserRouter>

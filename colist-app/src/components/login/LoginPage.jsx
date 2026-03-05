@@ -13,30 +13,21 @@ export default function LoginPage() {
       </header>
       <form className={styles.loginForm}>
         <div className={styles.loginInputContainer}>
-          <label
-            className={styles.inputLabel}
-            htmlFor="name"
-          >
-            Name
-          </label>
-
           <Input
             type="text"
             name="name"
             id="name"
             placeholder="Your name"
+            label="Name"
+            labelFor="name"
           />
-          <label
-            className={styles.inputLabel}
-            htmlFor="email"
-          >
-            Email
-          </label>
           <Input
             type="email"
             name="email"
             id="email"
             placeholder="your@email.com"
+            label="Email"
+            labelFor="email"
           />
         </div>
         <Button
