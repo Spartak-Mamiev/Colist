@@ -13,6 +13,9 @@ export default function LoginPage() {
   const [error, setError] = useState(null); // Stores login error messages
   const [loading, setLoading] = useState(false); // True while the sign-in request is in flight
 
+  // Check if this is a first-time visitor (no record of previous login)
+  const isFirstVisit = !localStorage.getItem('hasVisited');
+
   // Redirect to home if user is already logged in
   if (user) {
     navigate('/', { replace: true });
@@ -38,7 +41,8 @@ export default function LoginPage() {
       return;
     }
 
-    // On success, navigate to the main page
+    // On success, mark as returning visitor and navigate to the main page
+    localStorage.setItem('hasVisited', 'true');
     navigate('/');
   }
 
@@ -52,8 +56,14 @@ export default function LoginPage() {
         />
       </div>
       <header className={styles.ctaContainer}>
-        <h1 className={styles.title}>Welcome Back</h1>
-        <p className={styles.subtitle}>Sign in to continue sharing lists</p>
+        <h1 className={styles.title}>
+          {isFirstVisit ? 'Welcome to Grocio' : 'Welcome Back'}
+        </h1>
+        <p className={styles.subtitle}>
+          {isFirstVisit
+            ? 'Sign up to start sharing your lists'
+            : 'Sign in to continue sharing lists'}
+        </p>
       </header>
       <form
         className={styles.loginForm}

@@ -61,7 +61,8 @@ export default function SignUpPage() {
       return;
     }
 
-    // On success, navigate to the main page
+    // On success, mark as returning visitor and navigate to the main page
+    localStorage.setItem('hasVisited', 'true');
     navigate('/');
   }
 
