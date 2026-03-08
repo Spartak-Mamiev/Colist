@@ -92,8 +92,17 @@ export default function useListItems(listId) {
     return { data };
   }
 
-  // Toggle an item's completed state
+  // Toggle an item's completed state — uses optimistic update for snappy UI.
+  // Updates local state immediately, then sends the change to Supabase.
+  // If the server call fails, reverts the local state.
   async function toggleItem(id, currentState) {
+    // Optimistic update: flip the state in the UI right away
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, is_completed: !currentState } : item,
+      ),
+    );
+
     const { error } = await supabase
       .from('items')
       .update({ is_completed: !currentState })
@@ -101,6 +110,12 @@ export default function useListItems(listId) {
 
     if (error) {
       console.error('Error toggling item:', error.message);
+      // Revert: flip back to the original state since the server call failed
+      setItems((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, is_completed: currentState } : item,
+        ),
+      );
       return { error };
     }
 

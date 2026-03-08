@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import styles from './Modal.module.css';
 import Input from '../input/Input';
 import Button from '../button/Button';
 
 import { IoClose } from 'react-icons/io5';
 
+// Reusable modal component.
+// onSubmit receives the input value when the main button is clicked.
+// error displays an error message inside the modal.
 export default function Modal({
   listName,
   cta,
@@ -11,8 +15,19 @@ export default function Modal({
   value,
   variant,
   mainBtnName,
+  error,
   onClose,
+  onSubmit,
 }) {
+  const [inputValue, setInputValue] = useState(value || '');
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    if (onSubmit) {
+      onSubmit(inputValue); // Pass the input value to the parent handler
+    }
+  }
+
   return (
     <div
       className={styles.overlay}
@@ -36,21 +51,30 @@ export default function Modal({
         </div>
         <p className={styles[variant]}>{cta}</p>
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleFormSubmit}
           className={styles.form}
         >
           <Input
             type={type}
-            defaultValue={value}
-          ></Input>
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          {/* Display error message if there is one */}
+          {error && <p className={styles.error}>{error}</p>}
           <div className={styles.buttons}>
             <Button
               variant="secondary"
               onClick={onClose}
+              type="button"
             >
               Cancel
             </Button>
-            <Button variant="modalBtn">{mainBtnName}</Button>
+            <Button
+              variant="modalBtn"
+              type="submit"
+            >
+              {mainBtnName}
+            </Button>
           </div>
         </form>
       </div>
