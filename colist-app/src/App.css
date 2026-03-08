@@ -11,5 +11,6 @@ body{
   width: 100%;
   max-width: 600px;
   background: var(--color-background);
+  /* background: rgb(255, 249, 216); */
   justify-self: center;
 }
