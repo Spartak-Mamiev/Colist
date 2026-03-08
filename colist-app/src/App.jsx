@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './components/login/LoginPage';
 import MainPage from './components/mainPage/MainPage';
 import './App.css';
@@ -14,29 +15,48 @@ function App() {
       {/* AuthProvider wraps all routes so any component can access auth state */}
       <AuthProvider>
         <Routes>
-          <Route
-            path="/"
-            element={<MainPage />}
-          />
+          {/* Public routes — accessible without logging in */}
           <Route
             path="/login"
             element={<LoginPage />}
           />
           <Route
-            path="/members"
-            element={<Members />}
+            path="/signup"
+            element={<SignUpPage />}
+          />
+
+          {/* Protected routes — redirect to /login if not authenticated */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <MainPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/list/:listId"
+            element={
+              <ProtectedRoute>
+                <ListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/members/:listId"
+            element={
+              <ProtectedRoute>
+                <Members />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/settings"
-            element={<Settings />}
-          />
-          <Route
-            path="/list"
-            element={<ListPage />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUpPage />}
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </AuthProvider>
