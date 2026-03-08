@@ -11,6 +11,7 @@ import useListMembers from '../../hooks/useListMembers';
 import { useLists } from '../../context/ListsContext';
 
 import { HiOutlineUserAdd } from 'react-icons/hi';
+import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 
 export default function ListPage() {
   // Get the listId from the URL (e.g. /list/abc-123)
@@ -30,6 +31,7 @@ export default function ListPage() {
 
   const [newItemName, setNewItemName] = useState(''); // Input for adding a new item
   const [error, setError] = useState(null); // Error message for CRUD failures
+  const [showCompleted, setShowCompleted] = useState(false); // Toggle completed section visibility
 
   // Split items into active and completed for separate sections
   const activeItems = items.filter((item) => !item.is_completed);
@@ -120,19 +122,30 @@ export default function ListPage() {
             aria-label="Completed items"
             className={styles.completedSection}
           >
-            <p className={styles.sectionTitle}>Completed</p>
-            <ul className={styles.completedItems}>
-              {completedItems.map((item) => (
-                <Item
-                  key={item.id}
-                  name={item.name}
-                  addedBy={`Added by ${item.profiles?.name || 'unknown'}`}
-                  isCompleted={item.is_completed}
-                  onToggle={() => toggleItem(item.id, item.is_completed)}
-                  onDelete={() => deleteItem(item.id)}
-                />
-              ))}
-            </ul>
+            <button
+              className={styles.completedToggle}
+              onClick={() => setShowCompleted(!showCompleted)}
+              aria-expanded={showCompleted}
+            >
+              {showCompleted ? <FiChevronDown /> : <FiChevronRight />}
+              <span className={styles.sectionTitle}>
+                Completed ({completedItems.length})
+              </span>
+            </button>
+            {showCompleted && (
+              <ul className={styles.completedItems}>
+                {completedItems.map((item) => (
+                  <Item
+                    key={item.id}
+                    name={item.name}
+                    addedBy={`Added by ${item.profiles?.name || 'unknown'}`}
+                    isCompleted={item.is_completed}
+                    onToggle={() => toggleItem(item.id, item.is_completed)}
+                    onDelete={() => deleteItem(item.id)}
+                  />
+                ))}
+              </ul>
+            )}
           </section>
         )}
 
