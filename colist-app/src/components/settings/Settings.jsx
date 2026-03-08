@@ -3,6 +3,7 @@ import Button from '../ui/button/Button';
 import Input from '../ui/input/Input';
 import Avatar from '../ui/avatar/Avatar';
 import Header from '../ui/header/Header';
+import { useAuth } from '../../context/AuthContext';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +11,20 @@ import { RxExit } from 'react-icons/rx';
 
 export default function Settings() {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  // Get display name from user metadata (set during sign-up), fallback to email
+  const displayName = user?.user_metadata?.name || 'User';
+  const email = user?.email || '';
+  // Use the first letter of the name for the avatar
+  const avatarInitial = displayName.charAt(0).toUpperCase();
+
+  // Handle log out — sign out of Supabase then redirect to login
+  async function handleLogOut() {
+    await signOut();
+    navigate('/login');
+  }
+
   return (
     <div className={styles.settingsPage}>
       <Header
@@ -25,10 +40,10 @@ export default function Settings() {
         >
           <h2 id="profile-heading">Profile</h2>
           <div className={styles.profileSummary}>
-            <Avatar variant="large">Y</Avatar>
+            <Avatar variant="large">{avatarInitial}</Avatar>
             <div className={styles.profileText}>
-              <h3>You</h3>
-              <p>you@mail.com</p>
+              <h3>{displayName}</h3>
+              <p>{email}</p>
             </div>
           </div>
           <form
@@ -105,7 +120,7 @@ export default function Settings() {
           <Button
             type="button"
             variant="logout"
-            onClick={() => navigate('/login')}
+            onClick={handleLogOut}
           >
             <RxExit />
             Log Out

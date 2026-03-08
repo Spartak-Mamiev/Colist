@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import LoginPage from './components/login/LoginPage';
 import MainPage from './components/mainPage/MainPage';
 import './App.css';
@@ -10,32 +11,35 @@ import SignUpPage from './components/signUpPage/SignUpPage';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<MainPage />}
-        />
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
-        <Route
-          path="/members"
-          element={<Members />}
-        />
-        <Route
-          path="/settings"
-          element={<Settings />}
-        />
-        <Route
-          path="/list"
-          element={<ListPage />}
-        />
-        <Route
-          path="/signup"
-          element={<SignUpPage />}
-        />
-      </Routes>
+      {/* AuthProvider wraps all routes so any component can access auth state */}
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={<MainPage />}
+          />
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
+          <Route
+            path="/members"
+            element={<Members />}
+          />
+          <Route
+            path="/settings"
+            element={<Settings />}
+          />
+          <Route
+            path="/list"
+            element={<ListPage />}
+          />
+          <Route
+            path="/signup"
+            element={<SignUpPage />}
+          />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

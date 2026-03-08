@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import styles from './LoginPage.module.css';
 
 import Button from '../ui/button/Button';
@@ -6,9 +8,31 @@ import Input from '../ui/input/Input';
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
-  function handleSubmit(e) {
+  const [error, setError] = useState(null); // Stores login error messages
+  const [loading, setLoading] = useState(false); // True while the sign-in request is in flight
+
+  async function handleSubmit(e) {
     e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    // Grab email and password from the form inputs
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    // Call Supabase signIn — returns { data, error }
+    const { error: signInError } = await signIn(email, password);
+
+    if (signInError) {
+      // Show the error message to the user
+      setError(signInError.message);
+      setLoading(false);
+      return;
+    }
+
+    // On success, navigate to the main page
     navigate('/');
   }
 
@@ -42,13 +66,18 @@ export default function LoginPage() {
             required
           />
         </div>
+
+        {/* Display login error if there is one */}
+        {error && <p className={styles.error}>{error}</p>}
+
         <Button
           type="submit"
           variant="primary"
           size="large"
           fullWidth
+          disabled={loading}
         >
-          Sign in
+          {loading ? 'Signing in...' : 'Sign in'}
         </Button>
       </form>
       <p className={styles.signupPrompt}>
