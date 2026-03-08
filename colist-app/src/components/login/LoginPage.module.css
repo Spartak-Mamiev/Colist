@@ -1,5 +1,15 @@
 .logoBar {
   padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoText {
+  font-size: 40px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
 }
 
 .logo {

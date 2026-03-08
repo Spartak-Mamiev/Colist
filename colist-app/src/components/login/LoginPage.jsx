@@ -54,6 +54,7 @@ export default function LoginPage() {
           alt="Grocio logo"
           className={styles.logo}
         />
+        <span className={styles.logoText}>Grocio</span>
       </div>
       <header className={styles.ctaContainer}>
         <h1 className={styles.title}>
