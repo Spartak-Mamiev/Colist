@@ -1,3 +1,7 @@
+<img width="585" height="1266" alt="IMG_2091" src="https://github.com/user-attachments/assets/ec39b7e3-f392-4ca4-a16a-2c6c8a6ec110" />
+<img width="585" height="1266" alt="IMG_2090" src="https://github.com/user-attachments/assets/90840faa-d864-4456-b85b-d185e09d5b98" />
+<img width="585" height="1266" alt="IMG_2089" src="https://github.com/user-attachments/assets/1ed5f03a-2b93-45b4-88ee-d115a2def3bf" />
+
 # Grocio – Shared Grocery List App
 
 A real-time collaborative grocery list app built with React and Supabase. It allows couples, roommates, and families to manage household shopping together with instant updates and secure list sharing.
