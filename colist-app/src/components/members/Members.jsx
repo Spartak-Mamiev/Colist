@@ -60,6 +60,7 @@ export default function Members() {
             cta="Send an invitation to collaborate on this list"
             variant="enabled"
             type="email"
+            placeholder="Enter Users Email"
             error={inviteError}
             mainBtnName={
               <>

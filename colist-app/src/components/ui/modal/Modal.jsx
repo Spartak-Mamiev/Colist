@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Children, useState } from 'react';
 import styles from './Modal.module.css';
 import Input from '../input/Input';
 import Button from '../button/Button';
@@ -14,6 +14,7 @@ export default function Modal({
   type,
   value,
   variant,
+  placeholder,
   mainBtnName,
   error,
   onClose,
@@ -58,6 +59,7 @@ export default function Modal({
             type={type}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            placeholder={placeholder}
           />
           {/* Display error message if there is one */}
           {error && <p className={styles.error}>{error}</p>}

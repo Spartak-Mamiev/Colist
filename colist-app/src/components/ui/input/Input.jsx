@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { Children, useState } from 'react';
 import styles from './Input.module.css';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 export default function Input({
   type = 'text',
   labelFor,
+  placeholder,
   label,
   ...otherProps
 }) {
@@ -26,6 +27,7 @@ export default function Input({
           className={styles.input}
           type={isPassword && showPassword ? 'text' : type}
           {...otherProps}
+          placeholder={placeholder}
         />
         {isPassword && (
           <button
