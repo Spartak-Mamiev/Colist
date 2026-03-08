@@ -90,6 +90,13 @@ export default function LoginPage() {
           />
         </div>
 
+        <Link
+          to="/reset-password"
+          className={styles.forgotPassword}
+        >
+          Forgot password?
+        </Link>
+
         {/* Display login error if there is one */}
         {error && <p className={styles.error}>{error}</p>}
 

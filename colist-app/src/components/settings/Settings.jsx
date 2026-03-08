@@ -143,7 +143,7 @@ export default function Settings() {
           </select>
         </section>
 
-        <section
+        {/*         <section
           className={styles.section}
           aria-labelledby="notifications-heading"
         >
@@ -167,7 +167,7 @@ export default function Settings() {
               <span className={styles.toggleThumb}></span>
             </label>
           </div>
-        </section>
+        </section> */}
 
         <section
           className={styles.section}

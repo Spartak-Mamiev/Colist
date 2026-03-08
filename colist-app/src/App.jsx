@@ -10,6 +10,7 @@ import Members from './components/members/Members';
 import Settings from './components/settings/Settings';
 import ListPage from './components/listPage/ListPage';
 import SignUpPage from './components/signUpPage/SignUpPage';
+import ResetPassword from './components/resetPassword/ResetPassword';
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
               <Route
                 path="/signup"
                 element={<SignUpPage />}
+              />
+              <Route
+                path="/reset-password"
+                element={<ResetPassword />}
               />
 
               {/* Protected routes — redirect to /login if not authenticated */}
