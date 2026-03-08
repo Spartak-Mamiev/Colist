@@ -7,6 +7,7 @@ import Avatar from '../ui/avatar/Avatar';
 import Item from '../ui/item/Item';
 import Input from '../ui/input/Input';
 import useListItems from '../../hooks/useListItems';
+import useListMembers from '../../hooks/useListMembers';
 import { useLists } from '../../context/ListsContext';
 
 import { HiOutlineUserAdd } from 'react-icons/hi';
@@ -19,6 +20,9 @@ export default function ListPage() {
   // Get items and CRUD functions from the real-time hook
   const { items, loading, addItem, toggleItem, deleteItem } =
     useListItems(listId);
+
+  // Get members for this list to display collaborator avatars
+  const { members } = useListMembers(listId);
 
   // Get lists from context to display the list name in the header
   const { lists } = useLists();
@@ -50,6 +54,16 @@ export default function ListPage() {
         <Header>{currentList?.name || 'List'}</Header>
 
         <div className={styles.collaboratorsBar}>
+          <div className={styles.collaboratorsList}>
+            {members.map((member) => (
+              <Avatar
+                key={member.id}
+                variant="collaborator"
+              >
+                {member.profiles?.name?.charAt(0).toUpperCase() || '?'}
+              </Avatar>
+            ))}
+          </div>
           <Button
             variant="transparent"
             onClick={() => navigate(`/members/${listId}`)}

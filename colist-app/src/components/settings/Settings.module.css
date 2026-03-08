@@ -50,6 +50,8 @@
   padding: 10px;
   border-radius: var(--radius-small);
   border-color: var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
   outline: none;
 }
 

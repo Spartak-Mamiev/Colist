@@ -5,6 +5,7 @@ import Input from '../ui/input/Input';
 import Avatar from '../ui/avatar/Avatar';
 import Header from '../ui/header/Header';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import supabase from '../../lib/supabaseClient';
 
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +22,7 @@ export default function Settings() {
   // Use the first letter of the name for the avatar
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
+  const { theme, setTheme } = useTheme(); // Current theme preference and setter
   const [saveMessage, setSaveMessage] = useState(null); // Success/error message for profile save
   const [saving, setSaving] = useState(false); // True while saving profile
 
@@ -132,9 +134,12 @@ export default function Settings() {
             name="theme"
             id="theme"
             className={styles.select}
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
           >
-            <option value="Light">Light</option>
-            <option value="Dark">Dark</option>
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
           </select>
         </section>
 

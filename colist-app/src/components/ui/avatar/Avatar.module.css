@@ -10,6 +10,18 @@
   background: rgb(241, 158, 158);
 }
 
+.collaborator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background: rgb(241, 158, 158);
+}
+
 .large{
   width: 80px;
   height: 80px;
