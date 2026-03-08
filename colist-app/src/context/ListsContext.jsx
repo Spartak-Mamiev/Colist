@@ -32,6 +32,30 @@ export function ListsProvider({ children }) {
     }
 
     fetchLists();
+
+    // Subscribe to real-time changes on list_members for this user.
+    // When someone invites you to a list or you're removed, refetch all lists.
+    const channel = supabase
+      .channel(`user-lists:${user.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'list_members',
+          filter: `user_id=eq.${user.id}`,
+        },
+        () => {
+          // Refetch the full lists to get joined data
+          fetchLists();
+        },
+      )
+      .subscribe();
+
+    // Cleanup: unsubscribe when the component unmounts
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user]);
 
   // Create a new list and add the current user as owner

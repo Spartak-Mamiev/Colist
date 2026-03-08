@@ -10,24 +10,42 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const { signUp } = useAuth();
+  const { signUp, user } = useAuth();
 
   const [error, setError] = useState(null); // Stores sign-up error messages
   const [loading, setLoading] = useState(false); // True while the sign-up request is in flight
+
+  // Redirect to home if user is already logged in
+  if (user) {
+    navigate('/', { replace: true });
+    return null;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
 
     // Grab form values
-    const name = e.target.name.value;
+    const name = e.target.name.value.trim();
     const email = e.target.email.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
 
+    // Validate name is not empty after trimming
+    if (!name) {
+      setError('Name cannot be empty');
+      return;
+    }
+
     // Validate that passwords match before calling Supabase
     if (password !== confirmPassword) {
       setError('Passwords do not match');
+      return;
+    }
+
+    // Validate password length (Supabase requires at least 6 characters)
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters');
       return;
     }
 

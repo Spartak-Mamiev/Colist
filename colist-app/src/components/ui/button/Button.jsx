@@ -8,6 +8,7 @@ function Button({
   disabled,
   type = 'button',
   fullWidth,
+  ...rest // Spread remaining props (e.g. aria-label) onto the button element
 }) {
   const classNames = [
     styles.button,
@@ -24,6 +25,7 @@ function Button({
       onClick={onClick}
       disabled={disabled}
       type={type}
+      {...rest}
     >
       {children}
     </button>

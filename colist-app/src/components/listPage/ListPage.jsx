@@ -25,6 +25,7 @@ export default function ListPage() {
   const currentList = lists.find((l) => l.id === listId);
 
   const [newItemName, setNewItemName] = useState(''); // Input for adding a new item
+  const [error, setError] = useState(null); // Error message for CRUD failures
 
   // Split items into active and completed for separate sections
   const activeItems = items.filter((item) => !item.is_completed);
@@ -33,7 +34,12 @@ export default function ListPage() {
   // Handle adding a new item
   async function handleAddItem() {
     if (!newItemName.trim()) return;
-    await addItem(newItemName.trim());
+    setError(null);
+    const { error: addError } = await addItem(newItemName.trim());
+    if (addError) {
+      setError(addError.message);
+      return;
+    }
     setNewItemName('');
   }
 
@@ -56,6 +62,9 @@ export default function ListPage() {
       <main className={styles.groceryList}>
         {/* Loading state */}
         {loading && <p>Loading items...</p>}
+
+        {/* Display error if a CRUD operation fails */}
+        {error && <p className={styles.error}>{error}</p>}
 
         {/* Active items section */}
         {!loading && (

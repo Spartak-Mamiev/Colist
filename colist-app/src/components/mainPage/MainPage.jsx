@@ -9,11 +9,17 @@ import { useLists } from '../../context/ListsContext';
 export default function MainPage() {
   const { lists, loading, createList, deleteList } = useLists();
   const [newListName, setNewListName] = useState(''); // Input value for new list name
+  const [error, setError] = useState(null); // Error message for CRUD failures
 
   // Handle creating a new list from the input
   async function handleAddList() {
     if (!newListName.trim()) return; // Don't create empty lists
-    await createList(newListName.trim());
+    setError(null);
+    const { error: createError } = await createList(newListName.trim());
+    if (createError) {
+      setError(createError.message);
+      return;
+    }
     setNewListName(''); // Clear input after creating
   }
 
@@ -21,7 +27,11 @@ export default function MainPage() {
   async function handleDelete(e, listId) {
     e.preventDefault(); // Prevent the Link from navigating
     e.stopPropagation();
-    await deleteList(listId);
+    setError(null);
+    const { error: delError } = await deleteList(listId);
+    if (delError) {
+      setError(delError.message);
+    }
   }
 
   return (
@@ -33,6 +43,9 @@ export default function MainPage() {
       >
         {/* Show loading state while fetching lists */}
         {loading && <p>Loading your lists...</p>}
+
+        {/* Display error if a CRUD operation fails */}
+        {error && <p className={styles.error}>{error}</p>}
 
         {/* Show empty state when user has no lists */}
         {!loading && lists.length === 0 && (

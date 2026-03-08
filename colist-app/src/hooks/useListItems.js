@@ -16,20 +16,42 @@ export default function useListItems(listId) {
       const { eventType, new: newRecord, old: oldRecord } = payload;
 
       if (eventType === 'INSERT') {
-        // Add the new item if it doesn't already exist locally
-        setItems((prev) => {
-          if (prev.some((item) => item.id === newRecord.id)) return prev;
-          return [...prev, newRecord];
-        });
+        // Real-time payloads don't include joined data (profiles),
+        // so we refetch the single item with the join to get "added by" name
+        fetchSingleItem(newRecord.id);
       } else if (eventType === 'UPDATE') {
-        // Replace the updated item in local state
+        // Replace the updated item in local state (preserve existing profile join)
         setItems((prev) =>
-          prev.map((item) => (item.id === newRecord.id ? newRecord : item)),
+          prev.map((item) =>
+            item.id === newRecord.id ? { ...item, ...newRecord } : item,
+          ),
         );
       } else if (eventType === 'DELETE') {
         // Remove the deleted item from local state
         setItems((prev) => prev.filter((item) => item.id !== oldRecord.id));
       }
+    }
+
+    // Fetch a single item with its profile join (used after real-time INSERT)
+    async function fetchSingleItem(itemId) {
+      const { data, error } = await supabase
+        .from('items')
+        .select('*, profiles(name)')
+        .eq('id', itemId)
+        .single();
+
+      if (error) {
+        console.error('Error fetching new item:', error.message);
+        return;
+      }
+
+      // Add the item if it doesn't already exist, or update it if it does
+      setItems((prev) => {
+        if (prev.some((item) => item.id === data.id)) {
+          return prev.map((item) => (item.id === data.id ? data : item));
+        }
+        return [...prev, data];
+      });
     }
 
     // Fetch all items for this list, joined with the profile of who added them

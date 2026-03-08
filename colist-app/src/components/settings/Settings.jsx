@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import styles from './Settings.module.css';
 import Button from '../ui/button/Button';
 import Input from '../ui/input/Input';
 import Avatar from '../ui/avatar/Avatar';
 import Header from '../ui/header/Header';
 import { useAuth } from '../../context/AuthContext';
+import supabase from '../../lib/supabaseClient';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +21,43 @@ export default function Settings() {
   // Use the first letter of the name for the avatar
   const avatarInitial = displayName.charAt(0).toUpperCase();
 
+  const [saveMessage, setSaveMessage] = useState(null); // Success/error message for profile save
+  const [saving, setSaving] = useState(false); // True while saving profile
+
   // Handle log out — sign out of Supabase then redirect to login
   async function handleLogOut() {
     await signOut();
     navigate('/login');
+  }
+
+  // Handle saving profile changes to the profiles table
+  async function handleSaveProfile(e) {
+    e.preventDefault();
+    setSaveMessage(null);
+    setSaving(true);
+
+    const newName = e.target.name.value.trim();
+    const newEmail = e.target.email.value.trim();
+
+    if (!newName) {
+      setSaveMessage({ type: 'error', text: 'Name cannot be empty' });
+      setSaving(false);
+      return;
+    }
+
+    // Update the profiles table
+    const { error } = await supabase
+      .from('profiles')
+      .update({ name: newName, email: newEmail })
+      .eq('id', user.id);
+
+    if (error) {
+      setSaveMessage({ type: 'error', text: error.message });
+    } else {
+      setSaveMessage({ type: 'success', text: 'Profile updated!' });
+    }
+
+    setSaving(false);
   }
 
   return (
@@ -48,7 +83,7 @@ export default function Settings() {
           </div>
           <form
             className={styles.profileForm}
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSaveProfile}
           >
             <Input
               type="text"
@@ -57,6 +92,7 @@ export default function Settings() {
               placeholder="Your name"
               label="Name"
               labelFor="name"
+              defaultValue={displayName}
             />
             <Input
               type="email"
@@ -65,8 +101,24 @@ export default function Settings() {
               placeholder="you@email.com"
               label="Email"
               labelFor="email"
+              defaultValue={email}
             />
-            <Button type="submit">Save Changes</Button>
+            {/* Show save success or error message */}
+            {saveMessage && (
+              <p
+                className={
+                  saveMessage.type === 'error' ? styles.error : styles.success
+                }
+              >
+                {saveMessage.text}
+              </p>
+            )}
+            <Button
+              type="submit"
+              disabled={saving}
+            >
+              {saving ? 'Saving...' : 'Save Changes'}
+            </Button>
           </form>
         </section>
 

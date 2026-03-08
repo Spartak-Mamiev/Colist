@@ -9,9 +9,12 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     // On mount, check if the user already has a session (e.g. they refreshed the page)
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        console.error('Error restoring session:', error.message);
+      }
       setUser(session?.user ?? null);
-      setLoading(false);
+      setLoading(false); // Always set loading to false, even on error
     });
 
     // Listen for auth changes (login, logout, token refresh) to keep user in sync

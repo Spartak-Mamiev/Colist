@@ -8,10 +8,16 @@ import Input from '../ui/input/Input';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
 
   const [error, setError] = useState(null); // Stores login error messages
   const [loading, setLoading] = useState(false); // True while the sign-in request is in flight
+
+  // Redirect to home if user is already logged in
+  if (user) {
+    navigate('/', { replace: true });
+    return null;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
