@@ -156,5 +156,30 @@ export default function useListItems(listId) {
     return { error: null };
   }
 
-  return { items, loading, addItem, toggleItem, deleteItem };
+  // Update an item (e.g. rename). Uses optimistic UI update and reverts on error.
+  async function updateItem(id, updates) {
+    // Capture the previous state so we can revert on failure
+    let previous;
+    setItems((prev) => {
+      previous = prev.find((item) => item.id === id);
+      return prev.map((item) =>
+        item.id === id ? { ...item, ...updates } : item,
+      );
+    });
+
+    const { error } = await supabase.from('items').update(updates).eq('id', id);
+
+    if (error) {
+      console.error('Error updating item:', error.message);
+      // Revert to previous state
+      setItems((prev) =>
+        prev.map((item) => (item.id === id ? previous : item)),
+      );
+      return { error };
+    }
+
+    return { error: null };
+  }
+
+  return { items, loading, addItem, toggleItem, deleteItem, updateItem };
 }

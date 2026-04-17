@@ -1,6 +1,7 @@
 import styles from './Item.module.css';
 import Button from '../button/Button';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { MdOutlineModeEdit } from 'react-icons/md';
 
 // Renders a single grocery item with a checkbox and delete button.
 // onToggle is called when the checkbox is clicked.
@@ -12,6 +13,7 @@ export default function Item({
   onToggle,
   onDelete,
   onClick,
+  onEdit,
 }) {
   return (
     <li
@@ -31,19 +33,31 @@ export default function Item({
           <small className={styles.itemMeta}>{addedBy}</small>
         </div>
       </label>
-      <Button
-        variant="transparent"
-        onClick={(event) => {
-          event.stopPropagation();
-          onDelete(); // Delete the item from Supabase
-        }}
-        aria-label="Delete item"
-      >
-        <FaRegTrashAlt
-          fill="red"
-          className={styles.deleteBtn}
-        />
-      </Button>
+      <div className={styles.actions}>
+        <Button
+          variant="transparent"
+          onClick={(event) => {
+            event.stopPropagation();
+            onEdit?.();
+          }}
+          aria-label="Edit item"
+        >
+          <MdOutlineModeEdit />
+        </Button>
+        <Button
+          variant="transparent"
+          onClick={(event) => {
+            event.stopPropagation();
+            onDelete(); // Delete the item from Supabase
+          }}
+          aria-label="Delete item"
+        >
+          <FaRegTrashAlt
+            fill="red"
+            className={styles.deleteBtn}
+          />
+        </Button>
+      </div>
     </li>
   );
 }

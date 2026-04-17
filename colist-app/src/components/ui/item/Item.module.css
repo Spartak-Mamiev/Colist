@@ -48,3 +48,9 @@
 .deleteBtn:hover {
   scale: 1.2;
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

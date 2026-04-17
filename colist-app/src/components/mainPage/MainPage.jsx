@@ -5,12 +5,13 @@ import Input from '../ui/input/Input';
 import Header from '../ui/header/Header';
 import List from '../ui/list/List';
 import FriendsModal from '../ui/friendsModal/FriendsModal';
+import Modal from '../ui/modal/Modal';
 import { useLists } from '../../context/ListsContext';
 import useFriends from '../../hooks/useFriends';
 import { FiUserPlus } from 'react-icons/fi';
 
 export default function MainPage() {
-  const { lists, loading, createList, deleteList } = useLists();
+  const { lists, loading, createList, deleteList, updateList } = useLists();
   const {
     friends,
     searchResults,
@@ -22,6 +23,8 @@ export default function MainPage() {
   const [newListName, setNewListName] = useState(''); // Input value for new list name
   const [error, setError] = useState(null); // Error message for CRUD failures
   const [showFriendsModal, setShowFriendsModal] = useState(false);
+  const [editingList, setEditingList] = useState(null); // { id, name }
+  const [editError, setEditError] = useState(null);
 
   // Handle creating a new list from the input
   async function handleAddList() {
@@ -43,6 +46,29 @@ export default function MainPage() {
     const { error: delError } = await deleteList(listId);
     if (delError) {
       setError(delError.message);
+    }
+  }
+
+  function openEdit(list) {
+    setEditError(null);
+    setEditingList({ id: list.id, name: list.name });
+  }
+
+  function closeEdit() {
+    setEditingList(null);
+    setEditError(null);
+  }
+
+  async function handleEditSubmit(newName) {
+    if (!newName.trim()) {
+      setEditError('List name cannot be empty');
+      return;
+    }
+    const id = editingList.id;
+    closeEdit();
+    const { error: updErr } = await updateList(id, { name: newName.trim() });
+    if (updErr) {
+      setError(updErr.message || 'Failed to update list');
     }
   }
 
@@ -95,9 +121,23 @@ export default function MainPage() {
                 key={list.id}
                 list={list}
                 onDelete={(e) => handleDelete(e, list.id)}
+                onEdit={() => openEdit(list)}
               />
             ))}
           </div>
+        )}
+
+        {editingList && (
+          <Modal
+            listName="Edit list"
+            cta=""
+            value={editingList.name}
+            placeholder="List name"
+            mainBtnName="Save"
+            error={editError}
+            onClose={closeEdit}
+            onSubmit={handleEditSubmit}
+          />
         )}
       </section>
       <div

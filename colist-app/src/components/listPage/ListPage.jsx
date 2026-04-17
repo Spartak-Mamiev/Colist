@@ -6,6 +6,7 @@ import Header from '../ui/header/Header';
 import Avatar from '../ui/avatar/Avatar';
 import Item from '../ui/item/Item';
 import Input from '../ui/input/Input';
+import Modal from '../ui/modal/Modal';
 import useListItems from '../../hooks/useListItems';
 import useListMembers from '../../hooks/useListMembers';
 import { useLists } from '../../context/ListsContext';
@@ -19,7 +20,7 @@ export default function ListPage() {
   const navigate = useNavigate();
 
   // Get items and CRUD functions from the real-time hook
-  const { items, loading, addItem, toggleItem, deleteItem } =
+  const { items, loading, addItem, toggleItem, deleteItem, updateItem } =
     useListItems(listId);
 
   // Get members for this list to display collaborator avatars
@@ -31,6 +32,8 @@ export default function ListPage() {
 
   const [newItemName, setNewItemName] = useState(''); // Input for adding a new item
   const [error, setError] = useState(null); // Error message for CRUD failures
+  const [editingItem, setEditingItem] = useState(null); // { id, name }
+  const [editError, setEditError] = useState(null);
   const [showCompleted, setShowCompleted] = useState(false); // Toggle completed section visibility
 
   // Split items into active and completed for separate sections
@@ -49,8 +52,45 @@ export default function ListPage() {
     setNewItemName('');
   }
 
+  function openEdit(item) {
+    setEditError(null);
+    setEditingItem({ id: item.id, name: item.name });
+  }
+
+  function closeEdit() {
+    setEditingItem(null);
+    setEditError(null);
+  }
+
+  async function handleEditSubmit(newName) {
+    if (!newName.trim()) {
+      setEditError('Item name cannot be empty');
+      return;
+    }
+    setEditError(null);
+    // Optimistic update handled in the hook; close modal immediately for snappy UI
+    const id = editingItem.id;
+    closeEdit();
+    const { error: updateErr } = await updateItem(id, { name: newName.trim() });
+    if (updateErr) {
+      setError(updateErr.message || 'Failed to update item');
+    }
+  }
+
   return (
     <>
+      {editingItem && (
+        <Modal
+          listName="Edit item"
+          cta=""
+          value={editingItem.name}
+          placeholder="Item name"
+          mainBtnName="Save"
+          error={editError}
+          onClose={closeEdit}
+          onSubmit={handleEditSubmit}
+        />
+      )}
       <div className={styles.header}>
         {/* Show the list name from the database, fallback to "List" */}
         <Header
@@ -110,6 +150,7 @@ export default function ListPage() {
                   isCompleted={item.is_completed}
                   onToggle={() => toggleItem(item.id, item.is_completed)}
                   onDelete={() => deleteItem(item.id)}
+                  onEdit={() => openEdit(item)}
                 />
               ))}
             </ul>

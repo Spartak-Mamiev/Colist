@@ -101,8 +101,30 @@ export function ListsProvider({ children }) {
     return { error: null };
   }
 
+  // Update a list (e.g. rename). Uses optimistic UI update and reverts on error.
+  async function updateList(id, updates) {
+    let previous;
+    setLists((prev) => {
+      previous = prev.find((l) => l.id === id);
+      return prev.map((l) => (l.id === id ? { ...l, ...updates } : l));
+    });
+
+    const { error } = await supabase.from('lists').update(updates).eq('id', id);
+
+    if (error) {
+      console.error('Error updating list:', error.message);
+      // revert
+      setLists((prev) => prev.map((l) => (l.id === id ? previous : l)));
+      return { error };
+    }
+
+    return { error: null };
+  }
+
   return (
-    <ListsContext.Provider value={{ lists, loading, createList, deleteList }}>
+    <ListsContext.Provider
+      value={{ lists, loading, createList, deleteList, updateList }}
+    >
       {children}
     </ListsContext.Provider>
   );
